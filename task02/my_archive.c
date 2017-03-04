@@ -5,7 +5,7 @@
 ** Login   <yannick.suc@epitech.net>
 ** 
 ** Started on  Tue Feb 28 10:16:33 2017 suc yannick
-** Last update Sat Mar  4 12:17:21 2017 suc yannick
+** Last update Sat Mar  4 14:55:47 2017 suc yannick
 */
 
 #include "my_archive.h"
@@ -32,6 +32,7 @@ void	print_file(FILE *file, FILE *my_archive, char *name)
   if (buff[0] != 0)
     fprintf(my_archive, "%s\n", buff);
   fprintf(my_archive, "~\n");
+  fclose(file);
   free(buff);
 }
 
@@ -71,7 +72,7 @@ void	fill_archive(FILE *my_archive, char **list)
     {
       if ((dir = opendir(*list)) != NULL)
 	print_directory(dir, my_archive, *list);
-      else if ((file = fopen(*list, "r")) == 0)
+      else if ((file = fopen(*list, "r")) != NULL)
 	print_file(file, my_archive, *list);
       else
 	{
