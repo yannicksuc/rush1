@@ -1,0 +1,36 @@
+##
+## Makefile for Rush1 in /home/pierre/rush1/myarchive
+## 
+## Made by Pierre
+## Login   <pierre.lellu@epitech.eu@epitech.net>
+## 
+## Started on  Fri Mar  3 20:43:07 2017 Pierre
+## Last update Sat Mar  4 01:53:08 2017 Pierre
+##
+
+NAME	=	my_archive
+
+SRC	=	my_archive.c	\
+		my_strcat.c
+
+OBJ	=	$(SRC:.c=.o)
+
+CFLAGS	+=	-I ./include
+
+LFLAGS	+=	-L./lib/ -lmy -L./lib/my/ -lprintf
+
+all:	$(NAME)
+
+$(NAME):$(OBJ)
+	gcc -o $(NAME) $(OBJ) $(LFLAGS) -lncurses
+
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re:	fclean all
+
+.PHONY: re clean fclean all
