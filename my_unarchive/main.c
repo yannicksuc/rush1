@@ -5,58 +5,55 @@
 ** Login   <yannick.suc@epitech.net>
 ** 
 ** Started on  Fri Mar  3 20:36:52 2017 suc yannick
-** Last update Sat Mar  4 00:16:36 2017 suc yannick
+** Last update Sat Mar  4 03:44:08 2017 suc yannick
 */
 
 #include "main.h"
 
-void	parse_my_archive(int, char*);
+void	parse_my_archive(int fd);
 
-void    create_file(char *path, char *name, int fd)
+void    create_file(char *path, int fd)
 {
   FILE  *newFile;
   char  *tmp;
 
-  
-  if (path != NULL)
-    name = my_strcat(path, name);
-  newFile = fopen(name, "w+");
+  newFile = fopen(path, "w+");
   if (newFile == NULL)
     {
-      printf("%s : Error while creating the file\n", name);
+      printf("%s : Error while creating the file\n", path);
       exit(84);
     }
-  while (strcmp((tmp = get_next_line(fd)), "-") != 0 && tmp != NULL)
+  while (strcmp((tmp = get_next_line(fd)), "~") != 0 && tmp != NULL)
     fprintf(newFile, "%s\n", tmp);
   free(tmp);
   fclose(newFile);
 }
 
-void    create_dir(char *path, char *name, int fd)
+void    create_dir(char *path, int fd)
 {
-  if (path != NULL)
-    name = my_strcat(path, name);
-  if (mkdir(name, 0777) == -1 && opendir(name) == NULL)
+  if (mkdir(path, 0777) == -1 && opendir(path) == NULL)
     {
-      printf("%s : The directory already exist\n", name);
+      printf("%s : Error while creating the directory\n", path);
       exit (84);
     }
-  parse_my_archive(fd, my_strcat(name, "/"));
+  parse_my_archive(fd);
 }
 
-void	parse_my_archive(int fd, char *path)
+void	parse_my_archive(int fd)
 {
   char	*line;
-  char	*tmp;
+  char	*type;
+  char	*name;
   
   line = get_next_line(fd);
   while (line != NULL && *line != '<')
     {
-      tmp = strtok(line, ":");
-      if (strcmp(tmp, "f") == 0)
-	create_file(path, strtok(NULL, ":"), fd);
-      else if (strcmp(tmp, "d") == 0)
-	create_dir(path, strtok(NULL, ":"), fd);
+      type = strtok(line, ":");
+      name = strtok(NULL, ":");
+      if (*type == 'f')
+	create_file(name, fd);
+      else if (*type == 'd')
+	create_dir(name, fd);
       line = get_next_line(fd);
     }
 }
@@ -72,7 +69,7 @@ int	main(int ac, char **av)
       return (84);
     }
   if ((fd = open(av[1], O_RDONLY)) > 0)
-    parse_my_archive(fd, NULL);
+    parse_my_archive(fd);
   else
     {
       printf("Can't read the archive\n");

@@ -1,0 +1,439 @@
+d:dir1/
+d:dir1/dir2/
+f:dir1/dir2/test
+Je suis un test
+
+
+
+
+
+
+Salut
+~
+<
+<
+d:include/
+f:include/my.h
+/*
+** my.h for my.h in /home/pierre/delivery/Projet/PSU/PSU_2016_tetris
+** 
+** Made by Pierre
+** Login   <pierre.lellu@epitech.eu@epitech.net>
+** 
+** Started on  Thu Mar  2 15:07:48 2017 Pierre
+** Last update Sat Mar  4 01:53:49 2017 Pierre
+*/
+
+#ifndef MY_H_
+#define MY_H_
+# define BUFFER_SIZE 64000
+
+#include <unistd.h>
+#include <string.h>
+#include <ncurses.h>
+#include <curses.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <dirent.h>
+
+int	open_file(char *filepath);
+char	*my_strcat(char *s1, char *s2);
+
+#endif /* !MY_H_ */
+
+
+~
+f:include/my.h~
+/*
+** my.h for my.h in /home/pierre/delivery/Projet/PSU/PSU_2016_tetris
+** 
+** Made by Pierre
+** Login   <pierre.lellu@epitech.eu@epitech.net>
+** 
+** Started on  Thu Mar  2 15:07:48 2017 Pierre
+** Last update Sat Mar  4 01:51:48 2017 Pierre
+*/
+
+#ifndef MY_H_
+#define MY_H_
+# define BUFFER_SIZE 64000
+
+#include <unistd.h>
+#include <string.h>
+#include <ncurses.h>
+#include <curses.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <dirent.h>
+
+
+int	open_file(char *filepath);
+
+#endif /* !MY_H_ */
+
+
+~
+<
+d:lib/
+f:lib/libmy.a
+!<arch>
+/               0           0     0     0       522       `
+
+~
+d:lib/my/
+f:lib/my/libmy.a
+!<arch>
+/               0           0     0     0       304       `
+
+~
+f:lib/my/libprintf.a
+!<arch>
+/               0           0     0     0       304       `
+
+~
+f:lib/my/my_printf.c
+/*
+** main.c for main in /home/pierre/delivery/PSU_2016_my_printf
+** 
+** Made by Pierre
+** Login   <pierre.lellu@epitech.eu@epitech.net>
+** 
+** Started on  Mon Nov 14 09:49:32 2016 Pierre
+** Last update Sun Nov 20 18:33:17 2016 Pierre
+*/
+
+#include <stdlib.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include "my.h"
+#include "global.h"
+
+void		toto(char *s, int i, va_list *ap)
+{
+  int		k;
+  int		nbr;
+  
+  k = 0;	  
+  if (s[i] == '%' || s[i] == '\0')
+    my_putchar('%');
+  else
+    {
+      while (tab[k].c != s[i] && k < 11)
+	k++;
+      if (k < 11)
+	nbr = tab[k].function(ap);
+      else
+	{
+	  my_putchar('%');
+	  my_putchar(s[i]);
+	}
+    }
+}
+
+
+void		my_printf(char *s, ...)
+{
+  va_list	ap;
+  int		i;
+  
+  i = 0;
+  va_start(ap, s);
+  while (s[i] != '\0')
+    {
+      if (s[i] == '%')
+	{
+	  i++;
+	  toto(s, i, &ap);
+	}
+      else
+	my_putchar(s[i]);
+      i++;
+    }
+  va_end(ap);
+}
+
+~
+f:lib/my/my_printf_2flags.c
+/*
+** my_printf_2flags.c for 2flags in /home/pierre/delivery/PSU_2016_my_printf
+** 
+** Made by Pierre
+** Login   <pierre.lellu@epitech.eu@epitech.net>
+** 
+** Started on  Fri Nov 18 12:53:41 2016 Pierre
+** Last update Sat Nov 19 13:29:46 2016 Pierre
+*/
+
+#include <stdarg.h>
+#include "my.h"
+
+int	my_printf_u(va_list *ap)
+{
+  my_put_ubase(va_arg(*ap, unsigned int), 10, 'a');
+}
+
+int	my_printf_o(va_list *ap)
+{
+  my_put_ubase(va_arg(*ap, unsigned int), 8, 'a');
+}
+
+int	my_printf_x(va_list *ap)
+{
+  my_put_ubase(va_arg(*ap, unsigned int), 16, 'a');
+}
+
+int	my_printf_X(va_list *ap)
+{
+  my_put_ubase(va_arg(*ap, unsigned int), 16, 'A');
+}
+int     my_printf_S(va_list *ap)
+{
+  my_putstr2(va_arg(*ap, char*));
+}
+
+~
+f:lib/my/my_printf_3flags.c
+/*
+** my_printf_3flags.c for flags_3 in /home/pierre/delivery/PSU_2016_my_printf
+** 
+** Made by Pierre
+** Login   <pierre.lellu@epitech.eu@epitech.net>
+** 
+** Started on  Sun Nov 20 18:14:11 2016 Pierre
+** Last update Sun Nov 20 19:33:19 2016 Pierre
+*/
+
+#include <stdarg.h>
+#include "my.h"
+
+int	my_printf_p(va_list *ap)
+{
+  my_put_ubase(va_arg(*ap, unsigned long long), 16, 'a');
+}
+
+~
+f:lib/my/my_printf_flags.c
+/*
+** my_printf_flags.c for  in /home/pierre/delivery/PSU_2016_my_printf
+** 
+** Made by Pierre
+** Login   <pierre.lellu@epitech.eu@epitech.net>
+** 
+** Started on  Fri Nov 18 12:34:58 2016 Pierre
+** Last update Fri Nov 18 15:34:45 2016 Pierre
+*/
+
+#include <stdarg.h>
+#include "my.h"
+
+int	my_printf_c(va_list *ap)
+{
+  my_putchar(((char) va_arg(*ap, int)));
+}
+
+int	my_printf_s(va_list *ap)
+{
+  my_putstr(va_arg(*ap, char*));
+}
+
+int	my_printf_i(va_list *ap)
+{
+  my_put_nbr(va_arg(*ap, int));
+}
+
+int	my_printf_d(va_list *ap)
+{
+  my_put_nbr(va_arg(*ap, int));
+}
+
+int	my_printf_b(va_list *ap)
+{
+  my_put_ubase(va_arg(*ap, unsigned int), 2, 'a');
+}
+
+~
+f:lib/my/my_put_nbr.c
+/*
+** my_put_nbr.c for my_put_nbr in /home/pierre.lellu/CPool_Day07/lib/my
+** 
+** Made by pierre lellu
+** Login   <pierre.lellu@epitech.net>
+** 
+** Started on  Tue Oct 11 09:49:27 2016 pierre lellu
+** Last update Sun Nov 20 19:44:56 2016 Pierre
+*/
+
+void	my_putchar(char);
+void	my_putstr(char *);
+
+void	my_put_nbr2(int compteur, int result)
+{
+  while (compteur != 0)
+    {
+      my_putchar(result / compteur + '0');
+      result = result % compteur;
+      compteur = compteur / 10;
+    }
+}
+
+int	my_put_nbr(int	nb)
+{
+  int	compteur;
+  int	result;
+
+  compteur = 1;
+  if (nb == -2147483648)
+    my_putstr("-2147483648");
+  else
+    {
+      if (nb < 0)
+	{
+	  my_putchar ('-');
+	  nb = nb * (-1);
+	}
+      result = nb;
+      while (nb / 10 != 0)
+	{
+	  nb = nb / 10;
+	  compteur *= 10;
+	}
+      my_put_nbr2(compteur, result);
+    }
+}
+
+~
+f:lib/my/my_put_ubase.c
+/*
+** my_put_nbr.c for my_put_nbr in /home/pierre.lellu/CPool_Day07/lib/my
+** 
+** Made by pierre lellu
+** Login   <pierre.lellu@epitech.net>
+** 
+** Started on  Tue Oct 11 09:49:27 2016 pierre lellu
+** Last update Sun Nov 20 22:54:22 2016 Pierre
+*/
+
+void	my_putchar(char);
+
+int	my_put_ubase(long long nb, int	base, char str)
+{
+  if (nb < base)
+    {
+      if (nb >= 10)
+	{
+	  my_putchar(nb + str - 10);
+	}
+      else
+	my_putchar(nb + '0');
+    }
+  else
+    {
+      my_put_ubase(nb / base, base, str);
+      my_put_ubase(nb % base, base, str);
+    }
+}
+
+~
+f:lib/my/my_putchar.c
+/*
+** my_putchar.c for my_putchar in /home/pierre.lellu/CPool_Day07/lib/my
+** 
+** Made by pierre lellu
+** Login   <pierre.lellu@epitech.net>
+** 
+** Started on  Tue Oct 11 09:53:31 2016 pierre lellu
+** Last update Fri Nov 18 12:32:10 2016 Pierre
+*/
+
+#include <unistd.h>
+
+int	my_putchar(char c)
+{
+  write(1, &c, 1);
+  return (1);
+}
+
+~
+f:lib/my/my_putstr.c
+/*
+** toto.c for toto in /home/pierre.lellu/CPool_Day04
+** 
+** Made by pierre lellu
+** Login   <pierre.lellu@epitech.net>
+** 
+** Started on  Thu Oct  6 11:47:06 2016 pierre lellu
+** Last update Sun Nov 20 22:55:49 2016 Pierre
+*/
+
+void	my_putchar(char);
+
+int	my_putstr(char *str)
+{
+  int	i;
+
+  i = 0;
+  while (str && '\0' != str[i])
+    {
+      my_putchar(str[i]);
+      i++;
+    }
+  if (!str)
+    my_putstr("(null)");
+  return (i);
+}
+
+~
+f:lib/my/my_putstr2.c
+/*
+** my_putstr2.c for str in /home/pierre/delivery/PSU_2016_my_printf
+** 
+** Made by Pierre
+** Login   <pierre.lellu@epitech.eu@epitech.net>
+** 
+** Started on  Fri Nov 18 19:52:17 2016 Pierre
+** Last update Sun Nov 20 22:56:26 2016 Pierre
+*/
+
+void    my_putchar(char);
+
+int     my_putstr2(char *str)
+{
+  int   i;
+
+  i = 0;
+  while (str && '\0' != str[i])
+    {
+      if (str[i] >= 32 && str[i] < 127)
+	my_putchar(str[i]);
+      else
+	{
+	  my_putchar('\\');
+	  my_putchar(str[i] / 8 / 8 + '0');
+	  my_putchar(str[i] / 8 % 8 + '0');
+	  my_putchar(str[i] % 8 + '0');
+	  
+	  
+	} 
+      i++;
+    }
+  if (!str)
+    my_putstr2("(null)");
+  return (i);
+}
+
+~
+<
+f:lib/my_printf.a
+!<arch>
+/               0           0     0     0       304       `
+
+~
+<
