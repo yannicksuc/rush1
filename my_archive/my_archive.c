@@ -5,10 +5,10 @@
 ** Login   <yannick.suc@epitech.net>
 ** 
 ** Started on  Tue Feb 28 10:16:33 2017 suc yannick
-** Last update Sat Mar  4 03:40:03 2017 suc yannick
+** Last update Sat Mar  4 04:11:03 2017 suc yannick
 */
 
-#include "include/my.h"
+#include "my_archive.h"
 
 void	print_file(int fd, FILE *my_archive, char *name)
 {
@@ -23,7 +23,7 @@ void	print_file(int fd, FILE *my_archive, char *name)
       printf("Error with malloc\n");
       exit (84);
     }
-  memset(buff, fileStat.st_size + 1, 0);
+  memset(buff, 0, fileStat.st_size + 1);
   if (read(fd, buff, fileStat.st_size) < 0)
     {
       printf("Error with read\n");
@@ -32,6 +32,7 @@ void	print_file(int fd, FILE *my_archive, char *name)
   if (buff[0] != 0)
     fprintf(my_archive, "%s\n", buff);
   fprintf(my_archive, "~\n");
+  free(buff);
 }
 
 void		print_directory(DIR *dir, FILE *my_archive, char *path)
@@ -39,6 +40,8 @@ void		print_directory(DIR *dir, FILE *my_archive, char *path)
   struct dirent	*fileOrDir;
   char		*newPath;
 
+  if (path[(int) strlen(path) - 1] != '/')
+    path = my_strcat(path, "/");
   fprintf(my_archive, "d:%s\n", path);
   while ((fileOrDir = readdir(dir)) != NULL)
     {
@@ -81,16 +84,18 @@ void	fill_archive(FILE *my_archive, char **list)
 
 int	main(int ac, char **av)
 {
-  int	fd;
   FILE	*my_archive;
   
-  if (ac == 1)
+  if (ac < 3 || av[1] == NULL || av[2] == NULL)
     {
       printf("Usage: ./my_archive [archive_name] [files ...]\n");
       return (84);
     }
-  if ((my_archive = fopen(av[1],"w+")) == NULL)
-    return (84);
+  if ((my_archive = fopen(av[1], "w+")) == NULL)
+    {
+      printf("Can't create an archive file\n");
+      return (84);
+    }
   fill_archive(my_archive, av + 2);
   fclose(my_archive);
   return (0);

@@ -1,36 +1,37 @@
-##
-## Makefile for Rush1 in /home/pierre/rush1/myarchive
-## 
-## Made by Pierre
-## Login   <pierre.lellu@epitech.eu@epitech.net>
-## 
-## Started on  Fri Mar  3 20:43:07 2017 Pierre
-## Last update Sat Mar  4 01:53:08 2017 Pierre
-##
+## /*********************************************\
+## |*  Makefile created by AutoHeader v. 0.4.2  *|
+## |* https://github.com/FantinBibas/autoHeader *|
+## \*********************************************/
+
+CC	=	gcc
+
+RM	=	rm -f
+
+FLAGS	+=	
+
+CPPFLAGS	+=	-I include/
+
+CFLAGS	+=	-Wextra -Werror -Wall
 
 NAME	=	my_archive
 
-SRC	=	my_archive.c	\
+SRCS	=	my_archive.c	\
 		my_strcat.c
 
-OBJ	=	$(SRC:.c=.o)
-
-CFLAGS	+=	-I ./include
-
-LFLAGS	+=	-L./lib/ -lmy -L./lib/my/ -lprintf
+OBJS	=	$(SRCS:.c=.o)
 
 all:	$(NAME)
 
-$(NAME):$(OBJ)
-	gcc -o $(NAME) $(OBJ) $(LFLAGS) -lncurses
-
+$(NAME):	$(OBJS)
+	$(CC) $(OBJS) -o $(NAME) $(FLAGS)
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJS)
 
-fclean: clean
-	rm -f $(NAME)
+fclean:	clean
+	$(RM) $(NAME)
 
 re:	fclean all
 
-.PHONY: re clean fclean all
+.PHONY:	all clean fclean re
+

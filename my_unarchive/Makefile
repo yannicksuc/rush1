@@ -16,8 +16,8 @@ CFLAGS	+=	-Wextra -Werror -Wall
 NAME	=	my_unarchive
 
 SRCS	=	get_next_line.c	\
-		main.c	\
-		my_strcat.c
+		my_strcat.c	\
+		my_unarchive.c
 
 OBJS	=	$(SRCS:.c=.o)
 

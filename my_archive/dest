@@ -1,439 +1,439 @@
-d:dir1/
-d:dir1/dir2/
-f:dir1/dir2/test
-Je suis un test
+d:../my_archive/
+f:../my_archive/Makefile
+## /*********************************************\
+## |*  Makefile created by AutoHeader v. 0.4.2  *|
+## |* https://github.com/FantinBibas/autoHeader *|
+## \*********************************************/
+
+CC	=	gcc
+
+RM	=	rm -f
+
+FLAGS	+=	
+
+CPPFLAGS	+=	-I include/
+
+CFLAGS	+=	-Wextra -Werror -Wall
+
+NAME	=	my_archive
+
+SRCS	=	my_archive.c	\
+		my_strcat.c
+
+OBJS	=	$(SRCS:.c=.o)
+
+all:	$(NAME)
+
+$(NAME):	$(OBJS)
+	$(CC) $(OBJS) -o $(NAME) $(FLAGS)
+
+clean:
+	$(RM) $(OBJS)
+
+fclean:	clean
+	$(RM) $(NAME)
+
+re:	fclean all
+
+.PHONY:	all clean fclean re
 
 
-
-
-
-
-Salut
 ~
-<
-<
-d:include/
-f:include/my.h
+f:../my_archive/my_strcat.c
 /*
-** my.h for my.h in /home/pierre/delivery/Projet/PSU/PSU_2016_tetris
+** my_strcat.c for  in /home/yannick.suc/rush/rush1/myunarchive
 ** 
-** Made by Pierre
-** Login   <pierre.lellu@epitech.eu@epitech.net>
+** Made by suc yannick
+** Login   <yannick.suc@epitech.net>
 ** 
-** Started on  Thu Mar  2 15:07:48 2017 Pierre
-** Last update Sat Mar  4 01:53:49 2017 Pierre
+** Started on  Fri Mar  3 23:17:20 2017 suc yannick
+** Last update Sat Mar  4 01:56:27 2017 Pierre
 */
-
-#ifndef MY_H_
-#define MY_H_
-# define BUFFER_SIZE 64000
-
-#include <unistd.h>
 #include <string.h>
-#include <ncurses.h>
-#include <curses.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <dirent.h>
-
-int	open_file(char *filepath);
-char	*my_strcat(char *s1, char *s2);
-
-#endif /* !MY_H_ */
-
-
-~
-f:include/my.h~
-/*
-** my.h for my.h in /home/pierre/delivery/Projet/PSU/PSU_2016_tetris
-** 
-** Made by Pierre
-** Login   <pierre.lellu@epitech.eu@epitech.net>
-** 
-** Started on  Thu Mar  2 15:07:48 2017 Pierre
-** Last update Sat Mar  4 01:51:48 2017 Pierre
-*/
-
-#ifndef MY_H_
-#define MY_H_
-# define BUFFER_SIZE 64000
-
-#include <unistd.h>
-#include <string.h>
-#include <ncurses.h>
-#include <curses.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <dirent.h>
-
-
-int	open_file(char *filepath);
-
-#endif /* !MY_H_ */
-
-
-~
-<
-d:lib/
-f:lib/libmy.a
-!<arch>
-/               0           0     0     0       522       `
-
-~
-d:lib/my/
-f:lib/my/libmy.a
-!<arch>
-/               0           0     0     0       304       `
-
-~
-f:lib/my/libprintf.a
-!<arch>
-/               0           0     0     0       304       `
-
-~
-f:lib/my/my_printf.c
-/*
-** main.c for main in /home/pierre/delivery/PSU_2016_my_printf
-** 
-** Made by Pierre
-** Login   <pierre.lellu@epitech.eu@epitech.net>
-** 
-** Started on  Mon Nov 14 09:49:32 2016 Pierre
-** Last update Sun Nov 20 18:33:17 2016 Pierre
-*/
+#include "my_strcat.h"
 
 #include <stdlib.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include "my.h"
-#include "global.h"
-
-void		toto(char *s, int i, va_list *ap)
-{
-  int		k;
-  int		nbr;
-  
-  k = 0;	  
-  if (s[i] == '%' || s[i] == '\0')
-    my_putchar('%');
-  else
-    {
-      while (tab[k].c != s[i] && k < 11)
-	k++;
-      if (k < 11)
-	nbr = tab[k].function(ap);
-      else
-	{
-	  my_putchar('%');
-	  my_putchar(s[i]);
-	}
-    }
-}
-
-
-void		my_printf(char *s, ...)
-{
-  va_list	ap;
-  int		i;
-  
-  i = 0;
-  va_start(ap, s);
-  while (s[i] != '\0')
-    {
-      if (s[i] == '%')
-	{
-	  i++;
-	  toto(s, i, &ap);
-	}
-      else
-	my_putchar(s[i]);
-      i++;
-    }
-  va_end(ap);
-}
-
-~
-f:lib/my/my_printf_2flags.c
-/*
-** my_printf_2flags.c for 2flags in /home/pierre/delivery/PSU_2016_my_printf
-** 
-** Made by Pierre
-** Login   <pierre.lellu@epitech.eu@epitech.net>
-** 
-** Started on  Fri Nov 18 12:53:41 2016 Pierre
-** Last update Sat Nov 19 13:29:46 2016 Pierre
-*/
-
-#include <stdarg.h>
-#include "my.h"
-
-int	my_printf_u(va_list *ap)
-{
-  my_put_ubase(va_arg(*ap, unsigned int), 10, 'a');
-}
-
-int	my_printf_o(va_list *ap)
-{
-  my_put_ubase(va_arg(*ap, unsigned int), 8, 'a');
-}
-
-int	my_printf_x(va_list *ap)
-{
-  my_put_ubase(va_arg(*ap, unsigned int), 16, 'a');
-}
-
-int	my_printf_X(va_list *ap)
-{
-  my_put_ubase(va_arg(*ap, unsigned int), 16, 'A');
-}
-int     my_printf_S(va_list *ap)
-{
-  my_putstr2(va_arg(*ap, char*));
-}
-
-~
-f:lib/my/my_printf_3flags.c
-/*
-** my_printf_3flags.c for flags_3 in /home/pierre/delivery/PSU_2016_my_printf
-** 
-** Made by Pierre
-** Login   <pierre.lellu@epitech.eu@epitech.net>
-** 
-** Started on  Sun Nov 20 18:14:11 2016 Pierre
-** Last update Sun Nov 20 19:33:19 2016 Pierre
-*/
-
-#include <stdarg.h>
-#include "my.h"
-
-int	my_printf_p(va_list *ap)
-{
-  my_put_ubase(va_arg(*ap, unsigned long long), 16, 'a');
-}
-
-~
-f:lib/my/my_printf_flags.c
-/*
-** my_printf_flags.c for  in /home/pierre/delivery/PSU_2016_my_printf
-** 
-** Made by Pierre
-** Login   <pierre.lellu@epitech.eu@epitech.net>
-** 
-** Started on  Fri Nov 18 12:34:58 2016 Pierre
-** Last update Fri Nov 18 15:34:45 2016 Pierre
-*/
-
-#include <stdarg.h>
-#include "my.h"
-
-int	my_printf_c(va_list *ap)
-{
-  my_putchar(((char) va_arg(*ap, int)));
-}
-
-int	my_printf_s(va_list *ap)
-{
-  my_putstr(va_arg(*ap, char*));
-}
-
-int	my_printf_i(va_list *ap)
-{
-  my_put_nbr(va_arg(*ap, int));
-}
-
-int	my_printf_d(va_list *ap)
-{
-  my_put_nbr(va_arg(*ap, int));
-}
-
-int	my_printf_b(va_list *ap)
-{
-  my_put_ubase(va_arg(*ap, unsigned int), 2, 'a');
-}
-
-~
-f:lib/my/my_put_nbr.c
-/*
-** my_put_nbr.c for my_put_nbr in /home/pierre.lellu/CPool_Day07/lib/my
-** 
-** Made by pierre lellu
-** Login   <pierre.lellu@epitech.net>
-** 
-** Started on  Tue Oct 11 09:49:27 2016 pierre lellu
-** Last update Sun Nov 20 19:44:56 2016 Pierre
-*/
-
-void	my_putchar(char);
-void	my_putstr(char *);
-
-void	my_put_nbr2(int compteur, int result)
-{
-  while (compteur != 0)
-    {
-      my_putchar(result / compteur + '0');
-      result = result % compteur;
-      compteur = compteur / 10;
-    }
-}
-
-int	my_put_nbr(int	nb)
-{
-  int	compteur;
-  int	result;
-
-  compteur = 1;
-  if (nb == -2147483648)
-    my_putstr("-2147483648");
-  else
-    {
-      if (nb < 0)
-	{
-	  my_putchar ('-');
-	  nb = nb * (-1);
-	}
-      result = nb;
-      while (nb / 10 != 0)
-	{
-	  nb = nb / 10;
-	  compteur *= 10;
-	}
-      my_put_nbr2(compteur, result);
-    }
-}
-
-~
-f:lib/my/my_put_ubase.c
-/*
-** my_put_nbr.c for my_put_nbr in /home/pierre.lellu/CPool_Day07/lib/my
-** 
-** Made by pierre lellu
-** Login   <pierre.lellu@epitech.net>
-** 
-** Started on  Tue Oct 11 09:49:27 2016 pierre lellu
-** Last update Sun Nov 20 22:54:22 2016 Pierre
-*/
-
-void	my_putchar(char);
-
-int	my_put_ubase(long long nb, int	base, char str)
-{
-  if (nb < base)
-    {
-      if (nb >= 10)
-	{
-	  my_putchar(nb + str - 10);
-	}
-      else
-	my_putchar(nb + '0');
-    }
-  else
-    {
-      my_put_ubase(nb / base, base, str);
-      my_put_ubase(nb % base, base, str);
-    }
-}
-
-~
-f:lib/my/my_putchar.c
-/*
-** my_putchar.c for my_putchar in /home/pierre.lellu/CPool_Day07/lib/my
-** 
-** Made by pierre lellu
-** Login   <pierre.lellu@epitech.net>
-** 
-** Started on  Tue Oct 11 09:53:31 2016 pierre lellu
-** Last update Fri Nov 18 12:32:10 2016 Pierre
-*/
-
-#include <unistd.h>
-
-int	my_putchar(char c)
-{
-  write(1, &c, 1);
-  return (1);
-}
-
-~
-f:lib/my/my_putstr.c
-/*
-** toto.c for toto in /home/pierre.lellu/CPool_Day04
-** 
-** Made by pierre lellu
-** Login   <pierre.lellu@epitech.net>
-** 
-** Started on  Thu Oct  6 11:47:06 2016 pierre lellu
-** Last update Sun Nov 20 22:55:49 2016 Pierre
-*/
-
-void	my_putchar(char);
-
-int	my_putstr(char *str)
+char	*my_strcat(char *s1, char *s2)
 {
   int	i;
+  int	j;
+  char	*new;
 
-  i = 0;
-  while (str && '\0' != str[i])
+  if (s1 == NULL || s2 == NULL)
+    return (NULL);
+  new = malloc(sizeof(char) * (int) (strlen(s1) + strlen(s2) + 1));
+  i = -1;
+  while (s1[++i] != 0)
     {
-      my_putchar(str[i]);
-      i++;
+      new[i] = s1[i];
     }
-  if (!str)
-    my_putstr("(null)");
-  return (i);
+  j = -1;
+  while (s2[++j] != 0)
+    {
+      new[i + j] = s2[j];
+    }
+  new[i + j] = 0;
+  return (new);
 }
 
 ~
-f:lib/my/my_putstr2.c
+f:../my_archive/my_archive.c
 /*
-** my_putstr2.c for str in /home/pierre/delivery/PSU_2016_my_printf
+** my_archive.c for  in /home/yannick.suc/Corewar/part1/step1
 ** 
-** Made by Pierre
-** Login   <pierre.lellu@epitech.eu@epitech.net>
+** Made by suc yannick
+** Login   <yannick.suc@epitech.net>
 ** 
-** Started on  Fri Nov 18 19:52:17 2016 Pierre
-** Last update Sun Nov 20 22:56:26 2016 Pierre
+** Started on  Tue Feb 28 10:16:33 2017 suc yannick
+** Last update Sat Mar  4 04:10:37 2017 suc yannick
 */
 
-void    my_putchar(char);
+#include "my_archive.h"
 
-int     my_putstr2(char *str)
+void	print_file(int fd, FILE *my_archive, char *name)
 {
-  int   i;
+  struct stat	fileStat;
+  char		*buff;
 
-  i = 0;
-  while (str && '\0' != str[i])
+  fprintf(my_archive, "f:%s\n", name);
+  fstat(fd, &fileStat);
+  buff = malloc(sizeof(char) * (fileStat.st_size + 1));
+  if (buff == NULL)
     {
-      if (str[i] >= 32 && str[i] < 127)
-	my_putchar(str[i]);
+      printf("Error with malloc\n");
+      exit (84);
+    }
+  memset(buff, 0, fileStat.st_size + 1);
+  if (read(fd, buff, fileStat.st_size) < 0)
+    {
+      printf("Error with read\n");
+      exit (84);
+    }
+  if (buff[0] != 0)
+    fprintf(my_archive, "%s\n", buff);
+  fprintf(my_archive, "~\n");
+  free(buff);
+}
+
+void		print_directory(DIR *dir, FILE *my_archive, char *path)
+{
+  struct dirent	*fileOrDir;
+  char		*newPath;
+
+  if (path[(int) strlen(path) - 1] != '/')
+    path = my_strcat(path, "/");
+  fprintf(my_archive, "d:%s\n", path);
+  while ((fileOrDir = readdir(dir)) != NULL)
+    {
+      if (*fileOrDir->d_name != '.')
+	{
+	  newPath = my_strcat(path, fileOrDir->d_name);
+	  if (fileOrDir->d_type == DT_DIR)
+	    print_directory(opendir(newPath), my_archive, my_strcat(newPath, "/"));
+	  else if (fileOrDir->d_type == DT_REG)
+	    print_file(open(newPath, O_RDONLY), my_archive, newPath);
+	  else
+	    {
+	      printf("%s : Not a file or a Directory\n", newPath);
+	      exit (84);
+	    }
+	}
+    }
+  fprintf(my_archive, "<\n");
+}
+
+void	fill_archive(FILE *my_archive, char **list)
+{
+  DIR	*dir;
+  int	file;
+
+  while (*list != NULL)
+    {
+      if ((dir = opendir(*list)) != NULL)
+	print_directory(dir, my_archive, *list);
+      else if ((file = open(*list, O_RDONLY)) > 0)
+	print_file(file, my_archive, *list);
       else
 	{
-	  my_putchar('\\');
-	  my_putchar(str[i] / 8 / 8 + '0');
-	  my_putchar(str[i] / 8 % 8 + '0');
-	  my_putchar(str[i] % 8 + '0');
-	  
-	  
-	} 
-      i++;
+	  printf("%s : Invalid file or Directory\n", *list);
+	  exit(84);
+	}
+      free(*list);
+      list++;
     }
-  if (!str)
-    my_putstr2("(null)");
-  return (i);
+}
+
+int	main(int ac, char **av)
+{
+  FILE	*my_archive;
+  
+  if (ac < 3 || av[1] == NULL || av[2] == NULL)
+    {
+      printf("Usage: ./my_archive [archive_name] [files ...]\n");
+      return (84);
+    }
+  if ((my_archive = fopen(av[1], "w+")) == NULL)
+    {
+      printf("Can't create an archive file\n");
+      return (84);
+    }
+  fill_archive(my_archive, av + 2);
+  fclose(my_archive);
+  free(av);
+  return (0);
 }
 
 ~
-<
-f:lib/my_printf.a
-!<arch>
-/               0           0     0     0       304       `
+d:../my_archive/include/
+f:../my_archive/include/my_archive.h
+/*********************************************\
+|*   Header created by AutoHeader v. 0.4.2   *|
+|* https://github.com/FantinBibas/autoHeader *|
+\*********************************************/
 
+#ifndef MY_ARCHIVE_H_
+#  define MY_ARCHIVE_H_
+
+#  include <string.h>
+#  include <stdlib.h>
+#  include <sys/types.h>
+#  include <stdio.h>
+#  include <sys/stat.h>
+#  include <unistd.h>
+#  include <dirent.h>
+#  include <fcntl.h>
+
+char *my_strcat(char *, char *);
+
+#endif /* !MY_ARCHIVE_H_ */
+~
+f:../my_archive/include/my_strcat.h
+/*********************************************\
+|*   Header created by AutoHeader v. 0.4.2   *|
+|* https://github.com/FantinBibas/autoHeader *|
+\*********************************************/
+
+#ifndef MY_STRCAT_H_
+#  define MY_STRCAT_H_
+
+#  include <string.h>
+#  include <stdlib.h>
+
+
+#endif /* !MY_STRCAT_H_ */
+~
+<
+f:../my_archive/my_strcat.o
+ELF
+~
+f:../my_archive/dest
+d:../my_archive/
+f:../my_archive/Makefile
+## /*********************************************\
+## |*  Makefile created by AutoHeader v. 0.4.2  *|
+## |* https://github.com/FantinBibas/autoHeader *|
+## \*********************************************/
+
+CC	=	gcc
+
+RM	=	rm -f
+
+FLAGS	+=	
+
+CPPFLAGS	+=	-I include/
+
+CFLAGS	+=	-Wextra -Werror -Wall
+
+NAME	=	my_archive
+
+SRCS	=	my_archive.c	\
+		my_strcat.c
+
+OBJS	=	$(SRCS:.c=.o)
+
+all:	$(NAME)
+
+$(NAME):	$(OBJS)
+	$(CC) $(OBJS) -o $(NAME) $(FLAGS)
+
+clean:
+	$(RM) $(OBJS)
+
+fclean:	clean
+	$(RM) $(NAME)
+
+re:	fclean all
+
+.PHONY:	all clean fclean re
+
+
+~
+f:../my_archive/my_strcat.c
+/*
+** my_strcat.c for  in /home/yannick.suc/rush/rush1/myunarchive
+** 
+** Made by suc yannick
+** Login   <yannick.suc@epitech.net>
+** 
+** Started on  Fri Mar  3 23:17:20 2017 suc yannick
+** Last update Sat Mar  4 01:56:27 2017 Pierre
+*/
+#include <string.h>
+#include "my_strcat.h"
+
+#include <stdlib.h>
+char	*my_strcat(char *s1, char *s2)
+{
+  int	i;
+  int	j;
+  char	*new;
+
+  if (s1 == NULL || s2 == NULL)
+    return (NULL);
+  new = malloc(sizeof(char) * (int) (strlen(s1) + strlen(s2) + 1));
+  i = -1;
+  while (s1[++i] != 0)
+    {
+      new[i] = s1[i];
+    }
+  j = -1;
+  while (s2[++j] != 0)
+    {
+      new[i + j] = s2[j];
+    }
+  new[i + j] = 0;
+  return (new);
+}
+
+~
+f:../my_archive/my_archive.c
+/*
+** my_archive.c for  in /home/yannick.suc/Corewar/part1/step1
+** 
+** Made by suc yannick
+** Login   <yannick.suc@epitech.net>
+** 
+** Started on  Tue Feb 28 10:16:33 2017 suc yannick
+** Last update Sat Mar  4 04:10:37 2017 suc yannick
+*/
+
+#include "my_archive.h"
+
+void	print_file(int fd, FILE *my_archive, char *name)
+{
+  struct stat	fileStat;
+  char		*buff;
+
+  fprintf(my_archive, "f:%s\n", name);
+  fstat(fd, &fileStat);
+  buff = malloc(sizeof(char) * (fileStat.st_size + 1));
+  if (buff == NULL)
+    {
+      printf("Error with malloc\n");
+      exit (84);
+    }
+  memset(buff, 0, fileStat.st_size + 1);
+  if (read(fd, buff, fileStat.st_size) < 0)
+    {
+      printf("Error with read\n");
+      exit (84);
+    }
+  if (buff[0] != 0)
+    fprintf(my_archive, "%s\n", buff);
+  fprintf(my_archive, "~\n");
+  free(buff);
+}
+
+void		print_directory(DIR *dir, FILE *my_archive, char *path)
+{
+  struct dirent	*fileOrDir;
+  char		*newPath;
+
+  if (path[(int) strlen(path) - 1] != '/')
+    path = my_strcat(path, "/");
+  fprintf(my_archive, "d:%s\n", path);
+  while ((fileOrDir = readdir(dir)) != NULL)
+    {
+      if (*fileOrDir->d_name != '.')
+	{
+	  newPath = my_strcat(path, fileOrDir->d_name);
+	  if (fileOrDir->d_type == DT_DIR)
+	    print_directory(opendir(newPath), my_archive, my_strcat(newPath, "/"));
+	  else if (fileOrDir->d_type == DT_REG)
+	    print_file(open(newPath, O_RDONLY), my_archive, newPath);
+	  else
+	    {
+	      printf("%s : Not a file or a Directory\n", newPath);
+	      exit (84);
+	    }
+	}
+    }
+  fprintf(my_archive, "<\n");
+}
+
+void	fill_archive(FILE *my_archive, char **list)
+{
+  DIR	*dir;
+  int	file;
+
+  while (*list != NULL)
+    {
+      if ((dir = opendir(*list)) != NULL)
+	print_directory(dir, my_archive, *list);
+      else if ((file = open(*list, O_RDONLY)) > 0)
+	print_file(file, my_archive, *list);
+      else
+	{
+	  printf("%s : Invalid file or Directory\n", *list);
+	  exit(84);
+	}
+      free(*list);
+      list++;
+    }
+}
+
+int	main(int ac, char **av)
+{
+  FILE	*my_archive;
+  
+  if (ac < 3 || av[1] == NULL || av[2] == NULL)
+    {
+      printf("Usage: ./my_archive [archive_name] [files ...]\n");
+      return (84);
+    }
+  if ((my_archive = fopen(av[1], "w+")) == NULL)
+    {
+      printf("Can't create an archive file\n");
+      return (84);
+    }
+  fill_archive(my_archive, av + 2);
+  fclose(my_archive);
+  free(av);
+  return (0);
+}
+
+~
+d:../my_archive/include/
+f:../my_archive/include/my_archive.h
+/*********************************************\
+|*   Header created by AutoHeader v. 0.4.2   *|
+|* https://github.com/FantinBibas/autoHeader *|
+\*********************************************/
+
+#ifndef MY_ARCHIVE_H_
+#  define MY_ARCHIVE_H_
+
+#  include <string.h>
+#  include <stdlib.h>
+#  include <sys/types.h>
+#  include <stdio.h>
+#  include <sys/stat.h>
+#  in
+~
+f:../my_archive/my_archive.o
+ELF
+~
+f:../my_archive/my_archive
+ELF
 ~
 <

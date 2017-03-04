@@ -3,12 +3,18 @@
 |* https://github.com/FantinBibas/autoHeader *|
 \*********************************************/
 
-#ifndef GET_NEXT_LINE_H_
-#  define GET_NEXT_LINE_H_
+#ifndef MY_ARCHIVE_H_
+#  define MY_ARCHIVE_H_
 
 #  include <string.h>
 #  include <stdlib.h>
+#  include <sys/types.h>
+#  include <stdio.h>
+#  include <sys/stat.h>
 #  include <unistd.h>
+#  include <dirent.h>
+#  include <fcntl.h>
 
+char *my_strcat(char *, char *);
 
-#endif /* !GET_NEXT_LINE_H_ */
+#endif /* !MY_ARCHIVE_H_ */

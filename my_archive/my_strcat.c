@@ -8,6 +8,8 @@
 ** Last update Sat Mar  4 01:56:27 2017 Pierre
 */
 #include <string.h>
+#include "my_strcat.h"
+
 #include <stdlib.h>
 char	*my_strcat(char *s1, char *s2)
 {

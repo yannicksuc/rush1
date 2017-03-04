@@ -1,14 +1,14 @@
 /*
-** main.c for  in /home/yannick.suc/rush/rush1/myunarchive
+** my_unarchive.c for  in /home/yannick.suc/rush/rush1/myunarchive
 ** 
 ** Made by suc yannick
 ** Login   <yannick.suc@epitech.net>
 ** 
 ** Started on  Fri Mar  3 20:36:52 2017 suc yannick
-** Last update Sat Mar  4 03:44:08 2017 suc yannick
+** Last update Sat Mar  4 04:03:20 2017 suc yannick
 */
 
-#include "main.h"
+#include "my_unarchive.h"
 
 void	parse_my_archive(int fd);
 
